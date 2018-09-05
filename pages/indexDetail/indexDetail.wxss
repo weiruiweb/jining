@@ -138,6 +138,16 @@ view{
 	font-size:26rpx;
 	color:#999;
 }
+.input_wrap{
+	width:98%;
+	height:64rpx;
+	background:#fff;
+	padding-left:2%;
+	border-radius:5rpx;
+	align-items:center;
+	font-size:26rpx;
+	color:#999;
+}
 .input_img{
 	display:flex;
 	width:28rpx;

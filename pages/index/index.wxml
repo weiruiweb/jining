@@ -15,14 +15,10 @@
                 <view>告</view>
               </view>
               <view class="notes_txt notes_first">
-                  内容内容内容内容内容内容内容内容内容内容内容内容内容 内容内容内容内容内容内容内容内容内容内容内容内容内容 内容内容内容内容内容内容内容内容内容内容内容内容内容 内容内容内容内容内容内容内容内容内容内容内容内容内容 内容内容内容内容内容内容内容内容内容内容内容内容内容 内容内容内容内容内容内。
-              </view>
-              <view class="notes_txt notes_two">
-                  内容内容内容内容内容内容内容内容内容内容内容内容内容 内容内容内容内容内容内容内容内容内容内容内容内容内容 内容内容内容内容内容内容内容内容内容内容内容内容内容 。
-              </view>
-              <view class="notes_end">
-                <view>济宁办公厅</view>
-                <view>2018年9月4日</view>
+                <view class="content ql-editor" >
+                <import src="../../wxParse/wxParse.wxml"/>
+                <template is="wxParse" data="{{wxParseData:web_artData.content}}"/>
+                </view> 
               </view>
           </view>
       </view>
@@ -30,54 +26,24 @@
         <view class="theme_notes">
           点击相关主题，提出您的建议
         </view>
-        <view class="theme_list"   bindtap="intoPath" data-path="/pages/indexDetail/indexDetail">
-          <view class="theme_bg">
-            <image src="/images/bg2.jpg"></image>
-          </view>
-          <view class="theme_cont">
-              <image src="/images/img1.jpg"></image>
-          </view>
-          <view class="theme_txt">
-              <view class="txt_bg">
-                <view class="text_img">
-                  <image src="/images/txt_bg.png"></image>
+        <block wx:for="{{web_mainData}}" wx:key="id">
+          <view class="theme_list"   bindtap="intoPath" data-path="/pages/indexDetail/indexDetail?id={{item.id}}">
+            <view class="theme_bg">
+              <image src="/images/bg2.jpg"></image>
+            </view>
+            <view class="theme_cont">
+                <image src="{{item.mainImg[0].url}}"></image>
+            </view>
+            <view class="theme_txt">
+                <view class="txt_bg">
+                  <view class="text_img">
+                    <image src="/images/txt_bg.png"></image>
+                  </view>
+                  <view class="txt">{{item.title}}</view>
                 </view>
-                <view class="txt">推动创新驱动发展方面</view>
-              </view>
+            </view>
           </view>
-        </view>
-        <view class="theme_list"  bindtap="intoPath" data-path="/pages/indexDetail/indexDetail">
-          <view class="theme_bg">
-            <image src="/images/bg2.jpg"></image>
-          </view>
-          <view class="theme_cont">
-              <image src="/images/img1.jpg"></image>
-          </view>
-          <view class="theme_txt">
-              <view class="txt_bg">
-                <view class="text_img">
-                  <image src="/images/txt_bg.png"></image>
-                </view>
-                <view class="txt">推动创新驱动发展方面</view>
-              </view>
-          </view>
-        </view>
-        <view class="theme_list">
-          <view class="theme_bg">
-            <image src="/images/bg2.jpg"></image>
-          </view>
-          <view class="theme_cont">
-              <image src="/images/img1.jpg"></image>
-          </view>
-          <view class="theme_txt">
-              <view class="txt_bg">
-                <view class="text_img">
-                  <image src="/images/txt_bg.png"></image>
-                </view>
-                <view class="txt">推动创新驱动发展方面</view>
-              </view>
-          </view>
-        </view>
+        </block>
       </view>
   </view>
 </view>
