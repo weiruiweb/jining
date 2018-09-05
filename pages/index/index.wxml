@@ -6,13 +6,9 @@
 <view class="jining">
   <view class="jining_cont">
       <view class="notes">
-          <view class="notes_bg">
-            <image src="/images/notes_bg.jpg"></image>
-          </view>
           <view class="notes_cont">
-              <view class="notes_tlt flexRowBetween">
-                <view>公</view>
-                <view>告</view>
+              <view class="notes_tlt">
+                公告
               </view>
               <view class="notes_txt notes_first">
                 <view class="content ql-editor" >
@@ -20,6 +16,9 @@
                 <template is="wxParse" data="{{wxParseData:web_artData.content}}"/>
                 </view> 
               </view>
+          </view>
+          <view class="up_icon" style="position:relative;bottom:18rpx;left:80%;width:28rpx;height:30rpx;">
+            <image src="/images/up_icon.jpg" style="width:28rpx;height:30rpx;"></image>
           </view>
       </view>
       <view class="jining_theme">

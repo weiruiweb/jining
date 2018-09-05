@@ -18,7 +18,10 @@ Page({
       phone:'',
       passage_array:'',
       product_no:'',
-      passage2:''
+      passage2:'',
+      max: 400,
+      currentWordNumber:400,
+      spacing:'50px',
     },
  
     
@@ -68,9 +71,15 @@ Page({
   changeBind(e){
     const self = this;
     api.fillChange(e,self,'submitData');
-    self.setData({
-      web_submitData:self.data.submitData,
-    });  
+
+    var value = e.detail.value;
+    var len = parseInt(value.length);
+    if (len > self.data.max) return;
+      var lens = parseInt(400 - len)
+      self.setData({
+        web_submitData:self.data.submitData,
+        currentWordNumber: lens,
+      });  
     console.log(self.data.submitData)
   },
 

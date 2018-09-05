@@ -25,9 +25,9 @@
                   </view> 
               </view>
           </view>
-    </view>
-    <view class="u_icon">
-      <image src="/images/banner_bg1.png"></image>
+          <view class="up_icon" style="position:relative;bottom:18rpx;left:80%;width:28rpx;height:30rpx;">
+            <image src="/images/up_icon.jpg" style="width:28rpx;height:30rpx;"></image>
+          </view>
     </view>
     <view class="jining_input">
         <view class="input_bg">
@@ -85,12 +85,12 @@
                       <image src="/images/input_img.jpg"></image>
                     </view>
                     <view class="number">
-                      还可以输入<span>400</span>个字
+                      还可以输入<span>{{currentWordNumber}}</span>个字
                     </view>
                   </view>
                 </view>
                 <view class="textarea_input">
-                  <textarea palceholder="为利于您所提意见建议得到及时有效处理，请写清 时间、地点、事件，不要超过400字 " data-key="content" bindinput="changeBind" value="{{web_submitData.content}}">
+                  <textarea palceholder="为利于您所提意见建议得到及时有效处理，请写清 时间、地点、事件，不要超过400字 " data-key="content" bindinput="changeBind" value="{{web_submitData.content}}" placeholder='个性签名'  maxlength="{{max}}"  cursor-spacing="{{spacing}}">
                   </textarea>
                 </view>
               </view>
