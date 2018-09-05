@@ -1,0 +1,12 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/indexDetail/indexDetail"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#052e4d",
+    "navigationBarTitleText": "济宁市“放管服”专题活动",
+    "navigationBarTextStyle": "#fff"
+  }
+}

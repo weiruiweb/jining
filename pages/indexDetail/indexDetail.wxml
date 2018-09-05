@@ -1,0 +1,118 @@
+<!--indexDetail.wxml-->
+<view class="banner">
+  <view class="banner_img">
+    <image src="/images/second_banner.jpg"></image>
+  </view>
+  <view class="banner_txt">
+    <view class="text">
+      <view class="txt_bg">
+        <image src="/images/second_txt.png"></image>
+      </view>
+      <view class="text1">
+          推动创新驱动发展方面
+      </view>
+    </view>
+  </view>
+</view>
+<view class="jining">
+  <view class="jining_cont">
+    <view class="notes">
+          <view class="notes_cont">
+              <view class="notes_txt notes_first">
+                  1.内容内容内容内容内容内容内容内容内容内容内容内容内容 2.内容内容内容内容内容内容内容内容内容内容内容内容内容 3.内容内容内容内容内容内容内容内容内容内容内容内容内容
+              </view>
+          </view>
+    </view>
+    <view class="u_icon">
+      <image src="/images/banner_bg1.png"></image>
+    </view>
+    <view class="jining_input">
+        <view class="input_bg">
+          <image src="/images/input_bg.png"></image>
+        </view>
+        <view class="input_cont">
+          <view class="cont_in">
+              <view class="input_labe1">
+                <span>*</span>姓名
+              </view>
+              <view class="input_wrap">
+                <input placeholder="请输入姓名"></input>
+              </view>
+
+              <view class="input_labe1">
+                <span>*</span>公民身份证号码
+              </view>
+              <view class="input_wrap">
+                <input placeholder="请输入姓名"></input>
+              </view>
+
+              <view class="input_labe1">
+                <span>*</span>联系电话
+              </view>
+              <view class="input_wrap">
+                <input placeholder="请输入联系电话(固定电话需要填写区号)"></input>
+              </view>
+              <view class="input_labe1">
+                <span>*</span>留言人地址
+              </view>
+              <view class="input_wrap">
+                
+                <picker mode="region" class="" value="{{region}}" custom-item="{{customItem}}" bindchange="bindRegionChange">
+                <input  placeholder="请选择省/市/区" mode="region">{{region[0]}},{{region[1]}},{{region[2]}}</input>
+               
+                </picker>
+              </view>
+              <view class="input_wrap" style="margin-top:20rpx;">
+                <input placeholder="请填写详细地址"></input>
+              </view>
+
+              <view class="input_labe1">
+                <span>*</span>留言标题
+              </view>
+              <view class="input_wrap">
+                <input placeholder="请输入留言标题"></input>
+              </view>
+              <view class="message ">
+                <view class="flexRowBetween">
+                  <view class="input_labe1">
+                    <span>*</span>留言内容
+                  </view>
+                  <view style="width:50%;height:64rpx;" class="flexRowBetween">
+                    <view class="input_img">
+                      <image src="/images/input_img.jpg"></image>
+                    </view>
+                    <view class="number">
+                      还可以输入<span>400</span>个字
+                    </view>
+                  </view>
+                </view>
+                <view class="textarea_input">
+                  <textarea palceholder="为利于您所提意见建议得到及时有效处理，请写清 时间、地点、事件，不要超过400字 ">
+                  </textarea>
+                </view>
+              </view>
+              <view class="photo flexRowBetween" >
+                <view class="photo_item">
+                  <image src="/images/photo1.jpg"></image>
+                </view>
+                <view  class="photo_item">
+                  
+                </view>
+                <view  class="photo_item">
+                  
+                </view>
+              </view>
+
+              <view class="btn flexRowBetween">
+                <view class="btn1">
+                    提交
+                </view>
+                <view class="btn1">
+                    重置信息
+                </view>
+              </view>
+          </view>
+        </view>
+    </view>
+  </view>
+</view>

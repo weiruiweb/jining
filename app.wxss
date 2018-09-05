@@ -1,0 +1,33 @@
+/**app.wxss**/
+page{
+	width:100%;
+	min-height:100%;
+	background:#052e4d;
+} 
+.flexRowBetween{
+	display:flex;
+	flex-direction:row;
+	justify-content:space-between;
+	align-items:center;
+}
+.avoidOverflow{
+	overflow-y:hidden;
+	text-overflow:ellipsis;
+	white-space:nowrap;
+}
+
+.submit_info{
+margin:0rpx 25rpx;
+width:700rpx;
+height:88rpx;
+line-height:88rpx;
+text-align:center;
+font-size:36rpx;
+border-radius:50rpx;
+color:#fff;
+background:#00c6f7;
+border-radius:10rpx;
+}
+
+
+
