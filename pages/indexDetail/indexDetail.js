@@ -1,11 +1,13 @@
 import {Api} from '../../utils/api.js';
 var api = new Api();
-const app = getApp()
+const app = getApp();
+import {Token} from '../../utils/token.js';
+const token = new Token();
 
 Page({
   data: {
    
-    region: ['陕西省', '西安市', '雁塔区'],
+    
     id:'',
 
     mainImg:[],
@@ -34,7 +36,7 @@ Page({
     self.data.submitData.product_no = options.id;
     console.log(self.data.product_no)
     self.setData({
-      web_imgData:self.data.submitData.mainImg
+      web_currentWordNumber:400
     });
     self.getMainData()
   },
@@ -47,7 +49,6 @@ Page({
     self.setData({
       web_region: e.detail.value
     })
-    console.log(self.data.submitData)
   },
 
   messageAdd(){
@@ -56,31 +57,44 @@ Page({
     postData.token = wx.getStorageSync('token');
     postData.data = {};
     postData.data = api.cloneForm(self.data.submitData);
+
     const callback = (data)=>{
       if(data.solely_code == 100000){
-        api.showToast('留言成功','fail');
+        self.success()
+        /*setTimeout(function(){
+          api.pathTo('/pages/index/index','rela');
+        },1000);*/
       }else{
-        api.showToast('网络故障','fail');
+        api.showToast('网络故障','none',3000);
       };
       wx.hideLoading(); 
     };
-    api.messageAdd(postData,callback);
+    /*api.messageAdd(postData,callback);*/
       
   },
 
   changeBind(e){
     const self = this;
     api.fillChange(e,self,'submitData');
+      self.setData({
+        web_submitData:self.data.submitData,
+      });  
+    console.log(self.data.submitData)
+  },
 
+  currentWordNumber(e){
+    const self = this;
+    var currentWordNumber = api.fillChange(e,self,'submitData');
     var value = e.detail.value;
     var len = parseInt(value.length);
-    if (len > self.data.max) return;
+    if (len > self.data.max){
+      return;
+    } 
       var lens = parseInt(400 - len)
       self.setData({
         web_submitData:self.data.submitData,
-        currentWordNumber: lens,
+        web_currentWordNumber: lens,
       });  
-    console.log(self.data.submitData)
   },
 
   reSetInfomation(){
@@ -101,25 +115,48 @@ Page({
     }); 
   },
 
-submit(){
+
+  submit(){
     const self = this;
-    var phone = self.data.submitData.phone;
+    var name  = self.data.submitData.title;
     var id_num = self.data.submitData.keywords;
-    const pass = api.checkComplete(self.data.submitData);
+    var newObject = api.cloneForm(self.data.submitData);
+
+    delete newObject.mainImg;
+    delete newObject.passage2;
+    delete newObject.passage1;
+
+    const pass = api.checkComplete(newObject);
     if(pass){
       if(!id_num || !/^\d{6}(18|19|20)?\d{2}(0[1-9]|1[012])(0[1-9]|[12]\d|3[01])\d{3}(\d|[xX])$/.test(id_num)){
-        api.showToast('身份证格式错误','fail')
+        api.showToast('身份证格式错误','none')
       }else{
-        if(phone.trim().length != 11 || !/^1[3|4|5|6|7|8|9]\d{9}$/.test(phone)){
-          api.showToast('手机格式错误','fail')
+        if(!/^[\u4E00-\u9FA5]+$/.test(name)){
+          api.showToast('姓名格式错误','none')
         }else{
           self.messageAdd();
         }
       }
     }else{
-      api.showToast('请补全信息','fail');
+      api.showToast('请补全信息','none');
     };
   },
+
+
+  success(){
+    wx.showModal({
+    title: '提示',
+    content: '您的意见已提交 我们会向有关及时处理',
+    success: function(res) {
+      if (res.confirm) {
+        console.log('用户点击确定')
+      } else if (res.cancel) {
+        console.log('用户点击取消')
+      }
+    }
+    })  
+  },
+  
 
 
   getMainData(){
@@ -150,11 +187,31 @@ submit(){
     api.pathTo(api.getDataSet(e,'path'),'nav');
   },
 
+  deleteImage(e) {
+    const self = this;
+    var images = self.data.submitData.mainImg;
+    var index = e.currentTarget.dataset.index;
+    wx.showModal({
+     title: '提示',
+     content: '确定要删除此图片吗？',
+     success(res) {
+      if (res.confirm) {
+       images.splice(index, 1);
+      }else if (res.cancel) {
+        return false;    
+       }
+      self.setData({
+        web_submitData:self.data.submitData
+      });
+     }
+    })
+   },
+
 
   upLoadImg: function (){
     var self = this;
     if(self.data.submitData.mainImg.length>2){
-      api.showToast('仅限3张','fail');
+      api.showToast('仅限3张','none');
       return;
     };
     wx.showLoading({
@@ -167,26 +224,33 @@ submit(){
       success: function(res) {
         console.log(res);
         var tempFilePaths = res.tempFilePaths
-        
         wx.uploadFile({
-          url: 'https://liubin.yisuiyanghuoguo.com/liubin/public/index.php/api/v1/Base/FtpImage/upload ',
+          url: 'https://liubin.yisuiyanghuoguo.com/liubin/public/index.php/api/v1/Base/FtpImage/upload',
           filePath:tempFilePaths[0],
           name: 'file',
           formData: {
             token:wx.getStorageSync('token')
           },
           success: function(res){
+            console.log(res);
             res = JSON.parse(res.data);
-            self.data.submitData.mainImg.push({url:res.info.url})
-            self.setData({
-              web_imgData:self.data.submitData.mainImg
-            });
-            wx.hideLoading()
+            console.log(res)
+            if(res.solely_code==100000&&res.info&&res.info.url){ 
+              self.data.submitData.mainImg.push({url:res.info.url})
+              self.setData({
+                web_submitData:self.data.submitData
+              });
+            }else{
+              token.getUserInfo();
+              api.showToast('请重新上传','none',3000);
+            };       
+            wx.hideLoading();
+            
 
           },
           fail: function(err){
             wx.hideLoading();
-            api.showToast('上传失败','fail')
+            api.showToast('上传失败','none',3000)
           }
         })
       },

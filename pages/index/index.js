@@ -1,15 +1,11 @@
 import {Api} from '../../utils/api.js';
 var api = new Api();
 const app = getApp();
-import {Token} from '../../utils/token.js';
-const token = new Token();
+
 
 Page({
   data: {
  
-    searchItem:{
-      thirdapp_id:60
-    },
     mainData:[],
   },
   //事件处理函数
@@ -44,7 +40,7 @@ Page({
         self.data.mainData.push.apply(self.data.mainData,res.info.data);
       }else{
         self.data.isLoadAll = true;
-        api.showToast('没有更多了','fail');
+        api.showToast('没有更多了','none',3000);
       };
       self.setData({
         web_mainData:self.data.mainData,

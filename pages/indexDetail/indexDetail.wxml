@@ -39,7 +39,7 @@
                 <span>*</span>姓名
               </view>
               <view class="input_wrap">
-                <input placeholder="请输入姓名" data-key="title" bindinput="changeBind" value="{{web_submitData.title}}"></input>
+                <input  type="text" placeholder="请输入姓名" data-key="title" bindinput="changeBind" value="{{web_submitData.title}}"></input>
               </view>
 
               <view class="input_labe1">
@@ -59,52 +59,57 @@
                 留言人地址
               </view>
               <view class="input_wrap">
-                <picker mode="region" bindchange="bindRegionChange" value="{{region}}" custom-item="{{customItem}}">
-                  <view class="input_wrap">
-                    当前选择：{{web_region}}
+                <picker mode="region" bindchange="bindRegionChange"  custom-item="{{customItem}}">
+                  <view class="input_wrap" wx:if="{{web_region}}" style="line-height:64rpx;color:#666">
+                    {{web_region}}
+                  </view>
+                  <view class="input_wrap" wx:else style="line-height:64rpx;color:#666">
+                    请选择省/市/区
                   </view>
                 </picker>
               </view>
               <view class="input_wrap" style="margin-top:20rpx;">
-                <input placeholder="请填写详细地址" data-key="passage2" bindinput="changeBind" value="{{web_submitData.passage2}}"></input>
+                <input  type="text" placeholder="请填写详细地址" data-key="passage2" bindinput="changeBind" value="{{web_submitData.passage2}}"></input>
               </view>
 
               <view class="input_labe1">
                 <span>*</span>留言标题
               </view>
               <view class="input_wrap">
-                <input placeholder="请输入留言标题" data-key="passage_array" bindinput="changeBind" value="{{web_submitData.passage_array}}"></input>
+                <input  type="text" placeholder="请输入留言标题" data-key="passage_array" bindinput="changeBind" value="{{web_submitData.passage_array}}"></input>
               </view>
+
               <view class="message ">
                 <view class="flexRowBetween">
                   <view class="input_labe1">
                     <span>*</span>留言内容
                   </view>
-                  <view style="width:50%;height:64rpx;" class="flexRowBetween">
+                  <view style="width:45%;height:64rpx;" class="flexRowBetween">
                     <view class="input_img">
                       <image src="/images/input_img.jpg"></image>
                     </view>
                     <view class="number">
-                      还可以输入<span>{{currentWordNumber}}</span>个字
+                      还可以输入<span>{{web_currentWordNumber}}</span>个字
                     </view>
                   </view>
                 </view>
+
                 <view class="textarea_input">
-                  <textarea palceholder="为利于您所提意见建议得到及时有效处理，请写清 时间、地点、事件，不要超过400字 " data-key="content" bindinput="changeBind" value="{{web_submitData.content}}" placeholder='个性签名'  maxlength="{{max}}"  cursor-spacing="{{spacing}}">
+                  <textarea  data-key="content" bindinput="currentWordNumber" value="{{web_submitData.content}}" placeholder='为利于您所提意见建议得到及时有效处理，请写清 时间、地点、事件，不要超过400字 '  maxlength="400"  cursor-spacing="{{spacing}}">
                   </textarea>
                 </view>
               </view>
 
-              <view class="photo flexRowBetween" >
-                <block wx:for="{{web_imgData}}">
-                  <view class="photo_item" style="display:flex">
+              <view class="photo" style="width:100%;display:flex;flex-wrap: wrap;word-break:break-all;word-wrap:break-word">
+                <block wx:for="{{web_submitData.mainImg}}">
+                  <view class="photo_item" style="display:flex;width:31.5%;" bindlongpress="deleteImage" data-index="{{index}}">
                     <image  src="{{item.url}}"></image>
                   </view>
                 </block>
 
           
-              <view class="photo_item" bindtap="upLoadImg" wx:if="{{web_imgData.length<3}}">
-                <image src="/images/photo1.jpg"></image>
+              <view class="photo_item" style="width:31.5%;" bindtap="upLoadImg" wx:if="{{!web_submitData.mainImg||web_submitData.mainImg.length<3}}">
+                <image src="/images/photo1.jpg"></image> 
               </view>
           </view>
 

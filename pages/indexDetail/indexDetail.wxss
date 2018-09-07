@@ -175,7 +175,7 @@ view{
 }
 .photo_item{
 	width:31%;
-	margin:0 1.65%;
+	margin-right: 1.5%;
 }
 .btn{
 	width:92.8%;
