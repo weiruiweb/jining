@@ -21,21 +21,27 @@ Page({
       passage_array:'',
       product_no:'',
       passage2:'',
+     
+    },
+      is_show:false,
       max: 400,
       currentWordNumber:400,
       spacing:'50px',
-    },
- 
+    
     
   },
   //事件处理函数
- 
+  preventTouchMove:function(e) {
+
+  },
+
   onLoad(options){
     const self = this;
     self.data.id = options.id;
     self.data.submitData.product_no = options.id;
     console.log(self.data.product_no)
     self.setData({
+      is_show:self.data.is_show,
       web_currentWordNumber:400
     });
     self.getMainData()
@@ -60,16 +66,16 @@ Page({
 
     const callback = (data)=>{
       if(data.solely_code == 100000){
-        self.success()
-        /*setTimeout(function(){
-          api.pathTo('/pages/index/index','rela');
-        },1000);*/
+        self.data.is_show = true;
+        self.setData({
+          is_show:true
+        })
       }else{
         api.showToast('网络故障','none',3000);
       };
       wx.hideLoading(); 
     };
-    /*api.messageAdd(postData,callback);*/
+    api.messageAdd(postData,callback);
       
   },
 
@@ -143,19 +149,7 @@ Page({
   },
 
 
-  success(){
-    wx.showModal({
-    title: '提示',
-    content: '您的意见已提交 我们会向有关及时处理',
-    success: function(res) {
-      if (res.confirm) {
-        console.log('用户点击确定')
-      } else if (res.cancel) {
-        console.log('用户点击取消')
-      }
-    }
-    })  
-  },
+
   
 
 
@@ -185,6 +179,13 @@ Page({
   intoPath(e){
     const self = this;
     api.pathTo(api.getDataSet(e,'path'),'nav');
+  },
+
+  intoPathRedi(e){
+    const self = this;
+    wx.navigateBack({
+      delta:1
+    })
   },
 
   deleteImage(e) {
@@ -260,6 +261,9 @@ Page({
     })
   },
 
+
+
+  
 
 
   

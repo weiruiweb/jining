@@ -222,3 +222,55 @@ view{
 	width:100%;
 	height:100%;
 }
+.mask{
+	width:100%;
+	height:100%;
+	background:rgba(0,0,0,0.5);
+	position:fixed;
+	top:0;
+	left:0;
+	z-index:999;
+	overflow:hidden;
+
+}
+.mask_cont{
+	width:100%;
+	position:absolute;
+	top:100%;
+	z-index:999;
+	overflow:hidden;
+}
+.tishi_cont{
+	width:465rpx;height:450rpx;background:#fff;margin:0 auto;border-radius:10rpx;z-index:999;padding:20rpx 0;
+	box-shadow:0 0 10rpx #666;
+	
+}
+.tishi_in{
+	height:78%;
+	padding:0  30rpx;
+	background:#fff
+}
+.tishi_img{
+	margin:10rpx 0 35rpx;
+}
+.tishi_img image{
+	margin:0 auto;width:100rpx;height:100rpx;
+}
+.tishi_txt{
+	font-size:24rpx;color:#333;background:#fff;
+	line-height:36rpx;
+	text-align:center;
+}
+.tishi_img{
+	z-index:9999;text-align:center;
+}
+.come_back{
+	height:102rpx;
+	text-align:center;
+	font-size:30rpx;
+	color:#012437;
+	line-height:102rpx;
+	border-top:solid 1px #e0e0e0;
+	background:#fff;
+	z-index:999;
+}
