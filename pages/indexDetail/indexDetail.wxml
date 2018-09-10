@@ -97,7 +97,7 @@
                 </view>
 
                 <view class="textarea_input">
-                  <textarea  data-key="content" bindinput="currentWordNumber" value="{{web_submitData.content}}" placeholder='为利于您所提意见建议得到及时有效处理，请写清 时间、地点、事件，不要超过400字 '  maxlength="400"  cursor-spacing="{{spacing}}">
+                  <textarea  data-key="content" bindinput="currentWordNumber" value="{{web_submitData.content}}"  wx:if="{{ is_show==false}}"placeholder='为利于您所提意见建议得到及时有效处理，请写清 时间、地点、事件，不要超过400字 '  maxlength="400"  cursor-spacing="{{spacing}}">
                   </textarea>
                 </view>
               </view>
